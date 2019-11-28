@@ -1,0 +1,54 @@
+{
+  "name": "@perma-pin/http",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node --project ./tsconfig.commonjs.json src/server",
+    "build": "rm -rf pkg && pika build && tar -zcvf http.tgz pkg/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@perma-pin/lib": "https://264jv34znqff.arweave.net/b_yXsaW6fy9_QJsGhSyWFTakEgZL1GKFF0UHscmPUzA",
+    "@types/express": "4.17.2",
+    "@types/node": "12.12.14",
+    "@types/swagger-ui-express": "4.1.0",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "express": "4.17.1",
+    "express-fileupload": "1.1.6",
+    "read-yaml": "1.1.0",
+    "swagger-ui": "3.24.3",
+    "swagger-ui-express": "4.1.2"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ],
+      [
+        "@pika/plugin-build-deno"
+      ]
+    ]
+  },
+  "devDependencies": {
+    "@pika/pack": "0.5.0",
+    "@pika/plugin-build-deno": "0.6.1",
+    "@pika/plugin-build-node": "0.6.1",
+    "@pika/plugin-build-web": "0.6.1",
+    "@pika/plugin-ts-standard-pkg": "0.6.1",
+    "@pika/types": "0.6.1",
+    "jsdoc-to-markdown": "5.0.3",
+    "ts-node": "8.5.4",
+    "typescript": "3.7.2"
+  }
+}

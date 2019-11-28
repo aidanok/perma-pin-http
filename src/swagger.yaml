@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: "Perma-Pin API"
+  description: "API to Permaify and Pin IPFS files to the Arweave blockchain."
+  version: 0.1.0
+servers:
+  - url: https://perma-pin.bloc.space/api
+    description: Public API
+  - url: http://localhost:8080/api
+    description: Local development server
+
+components:
+  schemas:
+    ApiError:
+      properties:
+        ok:
+          type: boolean
+        error:
+          type: string
+      required: 
+        - error
+        - ok
+    ApiAddFileSuccessResponse:
+      properties:
+        ok:
+          type: boolean
+        hash:
+          type: string
+        id: 
+          type: string 
+        alreadyPinned:
+          type: boolean
+      # Both properties are required
+      required:  
+        - ok
+        - hash
+        - id
+    ApiPendingTxResponse:
+      properties:
+        ok:
+          type: boolean
+        status:
+          type: number
+          description: HTTP code, 200 (Mined), 202 (Pending), 404 (Not Found)
+      required: 
+        - ok
+        - status
+paths: 
+  /upload:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to add.
+      summary: Permaify a new file to IPFS to Arweave.
+      responses:
+        '200':
+          description: "Success. 'ok' will always be set to 'true'"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAddFileSuccessResponse'
+        '400':
+          description: "Bad Paramaters. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: "Unexpected Error. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+  /pin/{cid}:
+    post:
+      summary: Permaify existing IPFS Content to Arweave.
+      parameters:
+        - name: cid
+          in: path
+          description: IPFS CID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Success. 'ok' will always be set to 'true'"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiAddFileSuccessResponse'
+        '400':
+          description: "Bad Parameters. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: "Unexpected Error. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+  /pin:
+    post:
+      summary: Permafiy many existing IPFS CIDs to Arweave 
+      requestBody:
+        description: JSON with an array of CIDs, Maximum of 20 CID at once.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: "Success. 'ok' will always be set to 'true'"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                    - $ref: '#/components/schemas/ApiAddFileSuccessResponse'
+                    - $ref: '#/components/schemas/ApiError'
+                
+        '400':
+          description: "Bad Parameters. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: "Unexpected Error. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+
+  /checkpending/{id}:
+    post:
+      summary: Checks the pending status of an Arweave transactions. To account for block propogation, this API call may *sometimes* take up to ~80 seconds to return, to avoid giving 404 not found errors during block propogation.
+      parameters:
+        - name: id
+          in: path
+          description: Arweave Transaction ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Success. 'ok' will always be set to 'true'"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiPendingTxResponse'
+        '400':
+          description: "Bad Parameters. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
+        '500':
+          description: "Unexpected Error. 'ok' will always be set to 'false'"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ApiError'
