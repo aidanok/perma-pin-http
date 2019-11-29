@@ -36,7 +36,7 @@ npm start
 You can also start the `perma-pin-ui` project alongside this to use the Perma-Pin UI.
 
 
-### Deployment Usage 
+### Production Usage 
 
 ```javascript
 
@@ -47,9 +47,8 @@ const app = express();
 
 app.use('/api', apiRoutes);
 
-// Mount whatever else you want to serve, like other ipfs tools or static site etc. 
-
 app.listen()
 
 ```
 
+You probably want to deploy it behind SSL, to Lamda, or something similar.
