@@ -11,8 +11,8 @@ Published on the Arweave Blockchain in ESM & CommonJs Module Formats:
 
 ### Related To
 
-- [https://github.com/aokis/perma-pin-lib/](https://github.com/aokis/perma-pin-lib/)
-- [https://github.com/aokis/perma-pin-ui/](https://github.com/aokis/perma-pin-ui/)
+- [https://github.com/aokisok/perma-pin-lib/](https://github.com/aokisok/perma-pin-lib/)
+- [https://github.com/aokisok/perma-pin-ui/](https://github.com/aokisok/perma-pin-ui/)
 
 
 You might just want to visit the public service & api: 
