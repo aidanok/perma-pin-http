@@ -6,7 +6,7 @@ you can mount it on your own express server
 
 Published on the Arweave Blockchain in ESM & CommonJs Module Formats: 
 
-`npm install 
+`npm install https://65gtvqrdktsv.arweave.net/Hbz5wtJ4VlVF17eawrqKd2btmoQ8PTbYd7QIo3Pv3r8` 
 
 ```javascript
 
