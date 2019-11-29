@@ -6,7 +6,7 @@ you can mount it on your own express server
 
 Published on the Arweave Blockchain in ESM & CommonJs Module Formats: 
 
-`npm install https://65gtvqrdktsv.arweave.net/Hbz5wtJ4VlVF17eawrqKd2btmoQ8PTbYd7QIo3Pv3r8` 
+`npm install https://qmpiuuuv5t2t.arweave.net/tUG6k4b9xom4syATTW4RBQewoMH6O3BOM1MCf3RPW3k` 
 
 ```javascript
 
@@ -16,6 +16,8 @@ import express from 'express'
 const app = express(); 
 
 app.use('/api', api);
+
+// Mount whatever else you want to serve, like other ipfs tools or static site etc. 
 
 app.listen(...)
 
