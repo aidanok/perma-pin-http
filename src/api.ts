@@ -91,6 +91,12 @@ apiRoutes.post('/pin', async (req, res) => {
     res.json({ error: 'Invalid Request, Must be an Array' });
     return;
   }
+
+  if (req.body.length > 20) {
+    res.status(400);
+    res.json({ error: 'Must be 20 or less CIDs' });
+    return;
+  }
   
   try { 
     
