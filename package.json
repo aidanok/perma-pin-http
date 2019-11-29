@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node --project ./tsconfig.commonjs.json src/server",
-    "build": "rm -rf pkg && pika build && tar -zcvf http.tgz pkg/"
+    "build": "rm -rf pkg && pika build && cp src/swagger.yaml pkg/dist-node/ && cp src/swagger.yaml pkg/dist-src/ && tar -zcvf http.tgz pkg/"
   },
   "keywords": [],
   "author": "",
@@ -31,12 +31,6 @@
       ],
       [
         "@pika/plugin-build-node"
-      ],
-      [
-        "@pika/plugin-build-web"
-      ],
-      [
-        "@pika/plugin-build-deno"
       ]
     ]
   },
@@ -44,7 +38,6 @@
     "@pika/pack": "0.5.0",
     "@pika/plugin-build-deno": "0.6.1",
     "@pika/plugin-build-node": "0.6.1",
-    "@pika/plugin-build-web": "0.6.1",
     "@pika/plugin-ts-standard-pkg": "0.6.1",
     "@pika/types": "0.6.1",
     "jsdoc-to-markdown": "5.0.3",

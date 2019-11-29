@@ -1,2 +1,2 @@
-export * from './api';
-
+import { apiRoutes } from './api'
+export { apiRoutes }

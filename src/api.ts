@@ -72,6 +72,7 @@ apiRoutes.post('/pin/:cid', async (req, res) => {
   try { 
     
     const result = await permafiyExisting(req.params.cid);
+    
     if (!result.ok) { res.status(400) }
     res.json(result);
 
@@ -85,7 +86,6 @@ apiRoutes.post('/pin/:cid', async (req, res) => {
 
 apiRoutes.post('/pin', async (req, res) => {
 
-  
   if (!Array.isArray(req.body)) {
     res.status(400);
     res.json({ error: 'Invalid Request, Must be an Array' });
